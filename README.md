@@ -42,7 +42,7 @@ FlowLang is a domain-specific programming language built to address the complexi
 ### From PyPI (Recommended)
 
 ```bash
-pip install flowlang
+pip install flowlang-script
 ```
 
 ### From Source
@@ -98,7 +98,7 @@ print response
 Variables are declared using the `let` keyword and are dynamically typed.
 
 ```flow
-let name = "FlowLang"
+let name = "FlowLang-Script"
 let version = 1
 let pi = 3.14
 ```
@@ -244,8 +244,8 @@ print type("hello")   # Prints: str
 Returns the length of a string or list.
 
 ```flow
-let text = "FlowLang"
-print len(text)  # Prints: 8
+let text = "FlowLang-Script"
+print len(text)  # Prints: 15
 ```
 
 #### `range(start, end)`
@@ -403,7 +403,7 @@ from flowlang.lexer import Lexer
 from flowlang.parser import Parser
 from flowlang.interpreter import Interpreter
 
-# Your FlowLang code
+# Your FlowLang-Script code
 code = """
 let x = 10
 let y = 20

@@ -1,6 +1,6 @@
 print "Testing file I/O..."
 
-let msg = write_file("test_output.txt", "Hello from FlowLang!")
+let msg = write_file("test_output.txt", "Hello from FlowLang-Script!")
 print msg
 
 let content = read_file("test_output.txt")

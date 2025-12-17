@@ -1,4 +1,4 @@
-print "=== FlowLang: Basic Example ==="
+print "=== FlowLang-Script: Basic Example ==="
 
 let x = 10
 let y = 20

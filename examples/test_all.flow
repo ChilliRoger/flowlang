@@ -1,4 +1,4 @@
-print "=== FlowLang End-to-End Test Suite ==="
+print "=== FlowLang-Script End-to-End Test Suite ==="
 
 print "\n1. Testing Variables and Arithmetic..."
 let a = 10
@@ -42,8 +42,8 @@ print "add(multiply(2, 3), 10) ="
 print result2
 
 print "\n4. Testing Built-in Functions..."
-let text = "FlowLang"
-print "len('FlowLang') ="
+let text = "FlowLang-Script"
+print "len('FlowLang-Script') ="
 print len(text)
 
 let nums = range(1, 4)
@@ -62,7 +62,7 @@ while counter {
 }
 
 print "\n6. Testing File I/O..."
-let write_msg = write_file("test.txt", "FlowLang Test")
+let write_msg = write_file("test.txt", "FlowLang-Script Test")
 print write_msg
 let file_content = read_file("test.txt")
 print "File contains:"

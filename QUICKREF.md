@@ -5,7 +5,7 @@
 ### Variables
 ```flow
 let x = 42
-let name = "FlowLang"
+let name = "FlowLang-Script"
 ```
 
 ### Operators
