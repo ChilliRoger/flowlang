@@ -1,0 +1,8 @@
+print "Testing file I/O..."
+
+let msg = write_file("test_output.txt", "Hello from FlowLang!")
+print msg
+
+let content = read_file("test_output.txt")
+print "File content:"
+print content

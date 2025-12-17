@@ -1,0 +1,11 @@
+print "=== FlowLang: Basic Example ==="
+
+let x = 10
+let y = 20
+let sum = x + y
+print "Sum:"
+print sum
+
+let product = x * y
+print "Product:"
+print product

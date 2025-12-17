@@ -1,0 +1,5 @@
+print "Fetching data from API..."
+
+let data = http_get("https://jsonplaceholder.typicode.com/todos/1")
+print "API Response:"
+print data

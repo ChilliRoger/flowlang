@@ -1,0 +1,6 @@
+let x = 5 + 3
+print x
+let y = 10 * 2
+print y
+let z = y - x
+print z

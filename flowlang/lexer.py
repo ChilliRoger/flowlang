@@ -3,6 +3,7 @@ import re
 TOKENS = [
     ("NUMBER", r"\d+"),
     ("STRING", r'"[^"]*"'),
+    ("RETURN", r"return"),
     ("LET", r"let"),
     ("FUNC", r"func"),
     ("IF", r"if"),

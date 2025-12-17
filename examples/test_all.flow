@@ -1,0 +1,76 @@
+print "=== FlowLang End-to-End Test Suite ==="
+
+print "\n1. Testing Variables and Arithmetic..."
+let a = 10
+let b = 5
+let sum = a + b
+let diff = a - b
+let prod = a * b
+let quot = a / b
+print "10 + 5 ="
+print sum
+print "10 - 5 ="
+print diff
+print "10 * 5 ="
+print prod
+print "10 / 5 ="
+print quot
+
+print "\n2. Testing Comparisons..."
+if a > b {
+  print "10 > 5: True"
+}
+if sum == 15 {
+  print "15 == 15: True"
+}
+
+print "\n3. Testing Functions with Return..."
+func multiply(x, y) {
+  return x * y
+}
+
+func add(x, y) {
+  return x + y
+}
+
+let result1 = multiply(3, 4)
+print "multiply(3, 4) ="
+print result1
+
+let result2 = add(multiply(2, 3), 10)
+print "add(multiply(2, 3), 10) ="
+print result2
+
+print "\n4. Testing Built-in Functions..."
+let text = "FlowLang"
+print "len('FlowLang') ="
+print len(text)
+
+let nums = range(1, 4)
+print "range(1, 4) ="
+print nums
+
+print "type(42) ="
+print type(42)
+
+print "\n5. Testing While Loop..."
+let counter = 3
+print "Counting down from 3:"
+while counter {
+  print counter
+  let counter = counter - 1
+}
+
+print "\n6. Testing File I/O..."
+let write_msg = write_file("test.txt", "FlowLang Test")
+print write_msg
+let file_content = read_file("test.txt")
+print "File contains:"
+print file_content
+
+print "\n7. Testing HTTP Request..."
+let api_data = http_get("https://jsonplaceholder.typicode.com/todos/1")
+print "API returned:"
+print api_data
+
+print "\n=== All Tests Passed! ==="

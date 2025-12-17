@@ -1,0 +1,12 @@
+let text = "Hello"
+print len(text)
+
+let numbers = range(1, 5)
+print numbers
+
+print type(42)
+print type("hello")
+
+let num_str = "123"
+let num = int(num_str)
+print num

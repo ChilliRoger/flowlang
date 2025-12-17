@@ -36,3 +36,7 @@ class Function:
 class Call:
     def __init__(self, name, args):
         self.name, self.args = name, args
+
+class Return:
+    def __init__(self, value):
+        self.value = value

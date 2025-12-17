@@ -31,6 +31,10 @@ class Parser:
             self.eat("PRINT")
             return Print(self.expr())
 
+        if t == "RETURN":
+            self.eat("RETURN")
+            return Return(self.expr())
+
         if t == "IF":
             self.eat("IF")
             cond = self.expr()
@@ -63,8 +67,104 @@ class Parser:
         self.eat("RBRACE")
         return Block(stmts)
 
+    def peek(self):
+        """Look at current token without consuming it"""
+        if self.pos < len(self.tokens):
+            return self.tokens[self.pos]
+        return None
+
     def expr(self):
-        tok = self.eat()
-        if tok[0] == "NUMBER": return Number(int(tok[1]))
-        if tok[0] == "STRING": return String(tok[1][1:-1])
-        if tok[0] == "IDENT": return Var(tok[1])
+        """Parse expression with operator precedence"""
+        return self.comparison()
+
+    def comparison(self):
+        """Parse comparison operators: <, >, <=, >=, ==, !="""
+        left = self.addition()
+        
+        while self.peek() and self.peek()[0] == "OP" and self.peek()[1] in ["<", ">", "=", "!"]:
+            op_tok = self.eat("OP")
+            # Handle == and !=
+            if op_tok[1] in ["=", "!"] and self.peek() and self.peek()[0] == "OP" and self.peek()[1] == "=":
+                self.eat("OP")
+                op = op_tok[1] + "="
+            else:
+                op = op_tok[1]
+            right = self.addition()
+            left = BinOp(left, op, right)
+        
+        return left
+
+    def addition(self):
+        """Parse addition and subtraction: +, -"""
+        left = self.multiplication()
+        
+        while self.peek() and self.peek()[0] == "OP" and self.peek()[1] in ["+", "-"]:
+            op = self.eat("OP")[1]
+            right = self.multiplication()
+            left = BinOp(left, op, right)
+        
+        return left
+
+    def multiplication(self):
+        """Parse multiplication and division: *, /"""
+        left = self.primary()
+        
+        while self.peek() and self.peek()[0] == "OP" and self.peek()[1] in ["*", "/"]:
+            op = self.eat("OP")[1]
+            right = self.primary()
+            left = BinOp(left, op, right)
+        
+        return left
+
+    def primary(self):
+        """Parse primary expressions: numbers, strings, variables, function calls, parentheses"""
+        tok = self.peek()
+        
+        if not tok:
+            raise SyntaxError("Unexpected end of input")
+        
+        # Numbers
+        if tok[0] == "NUMBER":
+            self.eat("NUMBER")
+            return Number(int(tok[1]))
+        
+        # Strings
+        if tok[0] == "STRING":
+            self.eat("STRING")
+            # Handle escape sequences
+            string_value = tok[1][1:-1]  # Remove quotes
+            string_value = string_value.replace('\\n', '\n')
+            string_value = string_value.replace('\\t', '\t')
+            string_value = string_value.replace('\\r', '\r')
+            string_value = string_value.replace('\\\\', '\\')
+            return String(string_value)
+        
+        # Parenthesized expressions
+        if tok[0] == "LPAREN":
+            self.eat("LPAREN")
+            expr = self.expr()
+            self.eat("RPAREN")
+            return expr
+        
+        # Identifiers (variables or function calls)
+        if tok[0] == "IDENT":
+            name = self.eat("IDENT")[1]
+            
+            # Check if it's a function call
+            if self.peek() and self.peek()[0] == "LPAREN":
+                self.eat("LPAREN")
+                args = []
+                
+                # Parse arguments
+                if self.peek() and self.peek()[0] != "RPAREN":
+                    args.append(self.expr())
+                    while self.peek() and self.peek()[0] == "COMMA":
+                        self.eat("COMMA")
+                        args.append(self.expr())
+                
+                self.eat("RPAREN")
+                return Call(name, args)
+            else:
+                return Var(name)
+        
+        raise SyntaxError(f"Unexpected token: {tok}")

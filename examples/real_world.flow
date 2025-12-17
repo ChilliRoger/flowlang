@@ -1,0 +1,36 @@
+print "=== Real-World Example: API Data Processing Workflow ===\n"
+
+func process_user(user_id) {
+  print "Processing user ID:"
+  print user_id
+  
+  let url = "https://jsonplaceholder.typicode.com/users/"
+  let full_url = url + str(user_id)
+  
+  print "Fetching user data..."
+  let user = http_get(full_url)
+  
+  print "Saving to file..."
+  let filename = "user_" + str(user_id) + ".txt"
+  write_file(filename, str(user))
+  
+  print "Saved to:"
+  print filename
+  print ""
+  
+  return "User processed successfully"
+}
+
+print "Starting batch processing...\n"
+
+let users = range(1, 4)
+let count = 1
+
+while count < 4 {
+  let result = process_user(count)
+  print result
+  let count = count + 1
+}
+
+print "\n=== Workflow Complete ==="
+print "Processed 3 users successfully!"

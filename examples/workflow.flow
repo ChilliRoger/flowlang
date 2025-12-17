@@ -1,0 +1,19 @@
+print "=== Data Processing Workflow ==="
+
+func fetch_and_process() {
+  print "Step 1: Fetching data from API..."
+  let data = http_get("https://jsonplaceholder.typicode.com/users/1")
+  
+  print "Step 2: Saving raw data..."
+  let write_result = write_file("user_data.txt", str(data))
+  print write_result
+  
+  print "Step 3: Reading back for verification..."
+  let content = read_file("user_data.txt")
+  
+  print "Step 4: Data processed successfully!"
+  return "Workflow complete"
+}
+
+let result = fetch_and_process()
+print result
