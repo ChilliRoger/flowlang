@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="flowlang-script",
-    version="1.0.0",
+    version="1.0.1",
     author="ChilliRoger",
     author_email="your.email@example.com",  # Update this
     description="A lightweight interpreted programming language for workflow automation and API orchestration",
